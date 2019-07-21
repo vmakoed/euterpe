@@ -3,8 +3,8 @@
 require 'rspotify'
 
 require 'euterpe/providers/spotify/authentication'
-require 'euterpe//providers/spotify/link_generation'
-require 'euterpe//providers/spotify/query_building'
+require 'euterpe/providers/spotify/link_generation'
+require 'euterpe/providers/spotify/query_building'
 
 module Euterpe
   module Providers
