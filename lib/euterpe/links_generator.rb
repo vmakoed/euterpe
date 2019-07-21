@@ -5,8 +5,6 @@ require 'euterpe/providers/apple_music'
 require 'euterpe/providers/spotify'
 require 'euterpe/authentication'
 
-require 'pry'
-
 module Euterpe
   class LinksGenerator
     class << self
