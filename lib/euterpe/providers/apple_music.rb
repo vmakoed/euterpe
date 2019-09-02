@@ -2,7 +2,7 @@
 
 require 'itunes-search-api'
 
-require 'euterpe/providers/apple_music/link_generation'
+require 'euterpe/providers/apple_music/fetching'
 require 'euterpe/providers/apple_music/query_building'
 
 module Euterpe

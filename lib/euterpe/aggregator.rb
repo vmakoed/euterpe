@@ -6,7 +6,7 @@ require 'euterpe/providers/spotify'
 require 'euterpe/authentication'
 
 module Euterpe
-  class LinksGenerator
+  class Aggregator
     class << self
       def run(source_link:)
         new(source_link: source_link).run
@@ -22,10 +22,20 @@ module Euterpe
     def run
       @provider = Euterpe::Providers::Resolver.resolve(link: @source_link)
       @query = build_query
-      fetch_links
+      wrap_tracks(fetch_tracks)
     end
 
     private
+
+    def wrap_tracks(tracks)
+      track_with_info = tracks.values.find { |track| track[:info].present? }
+      return { links: tracks } unless track_with_info.present?
+
+      {
+        links: tracks.map { |provider, data| { provider => data[:url] } }.reduce({}, :merge),
+        info: track_with_info[:info]
+      }
+    end
 
     def build_query
       Euterpe::Authentication.authenticate(service: @provider)
@@ -33,12 +43,15 @@ module Euterpe
       Object.const_get(query_builder).fetch_query(source_link: @source_link)
     end
 
-    def fetch_links
-      providers = Euterpe::PROVIDERS.map { |provider| provider[:name] }
-      providers.each_with_object({}) do |provider, links|
-        executor = "Euterpe::Providers::#{provider.classify}::LinkGeneration"
-        links[provider] = Object.const_get(executor).fetch_link(query: @query)
+    def fetch_tracks
+      Euterpe::PROVIDERS.each_with_object({}) do |provider, tracks|
+        tracks[provider[:name]] = fetch_for_provider(provider)
       end
+    end
+
+    def fetch_for_provider(provider)
+      executor = "Euterpe::Providers::#{provider[:name].classify}::Fetching"
+      Object.const_get(executor).fetch_track(query: @query, with_info: provider[:fetch_info])
     end
   end
 end
