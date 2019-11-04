@@ -3,6 +3,7 @@
 require 'euterpe/providers/resolver'
 require 'euterpe/providers/apple_music'
 require 'euterpe/providers/spotify'
+require 'euterpe/providers/deezer'
 require 'euterpe/authentication'
 
 module Euterpe

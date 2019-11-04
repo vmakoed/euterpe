@@ -31,4 +31,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activesupport', '~> 5.2', '>= 5.2.3'
   spec.add_dependency 'itunes-search-api', '~> 0.1.0'
   spec.add_dependency 'rspotify', '~> 2.6'
+  spec.add_dependency 'faraday', '~> 0.9.2'
 end

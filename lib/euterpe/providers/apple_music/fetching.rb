@@ -15,7 +15,8 @@ module Euterpe
         end
 
         def api_request(query)
-          ITunesSearchAPI.search(term: query).first
+          track_artist = query.delete('|')
+          ITunesSearchAPI.search(term: track_artist).first
         end
 
         def track_info(track)
