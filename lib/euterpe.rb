@@ -8,6 +8,7 @@ require 'euterpe/aggregator'
 module Euterpe
   PROVIDERS = [
     { domain: 'open.spotify.com', name: 'spotify', fetch_info: true },
-    { domain: 'music.apple.com', name: 'apple_music' }
+    { domain: 'music.apple.com', name: 'apple_music' },
+    { domain: 'www.deezer.com', name: 'deezer' }
   ].freeze
 end

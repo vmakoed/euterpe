@@ -15,8 +15,9 @@ module Euterpe
         end
 
         def api_request(query)
+          track_artist = query.delete('|')
           Euterpe::Authentication.authenticate(service: SERVICE)
-          RSpotify::Track.search(query).first
+          RSpotify::Track.search(track_artist).first
         end
 
         def track_info(track)

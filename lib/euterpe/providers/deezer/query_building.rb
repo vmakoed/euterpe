@@ -1,15 +1,14 @@
-# frozen_string_literal: true
-
 module Euterpe
   module Providers
-    module Spotify
+    module Deezer
       module QueryBuilding
         module_function
 
         def fetch_query(source_link:)
           track_id = URI.parse(source_link).path.split('/').last
-          track = RSpotify::Track.find(track_id)
-          "#{track.artists.map(&:name).join(' ')} |#{track.name}"
+          resp = Faraday.get "https://api.deezer.com/track/#{track_id}"
+          track = JSON.parse(resp.body)
+          "#{track['artist']['name']} |#{track['title']}"
         end
       end
     end

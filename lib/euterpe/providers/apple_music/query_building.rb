@@ -10,7 +10,7 @@ module Euterpe
           track_parameters = URI.decode_www_form(URI.parse(source_link).query)
           track_id = Hash[track_parameters]['i']
           track = ITunesSearchAPI.lookup(id: track_id)
-          "#{track['artistName']} #{track['trackName']}"
+          "#{track['artistName']} |#{track['trackName']}"
         end
       end
     end
