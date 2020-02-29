@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'pry', '~> 0.12.2'
-  spec.add_development_dependency 'rake', '~> 12.3', '>= 12.3.2'
+  spec.add_development_dependency 'rake', '>= 12.3.2', '~> 13.0'
   spec.add_development_dependency 'rubocop', '~> 0.73.0'
 
   spec.add_dependency 'activesupport', '~> 5.2', '>= 5.2.3'
